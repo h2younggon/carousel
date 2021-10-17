@@ -1,17 +1,21 @@
-.carousel_wrapper {
+.container {
+  position: relative;
+}
+
+.carousel {
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 530px;
+  height: 400px;
 }
 
-.carousel_container {
+.carousel_content {
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
 }
-.carousel_item {
+.carousel_content_item {
   width: 100%;
   height: 100%;
   float: left;
@@ -22,7 +26,6 @@ img:not(.icon) {
   position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 .prev_button {
   position: absolute;
@@ -30,6 +33,7 @@ img:not(.icon) {
   left: 5%;
   border: none;
   background: none;
+  cursor: pointer;
 }
 .next_button {
   position: absolute;
@@ -37,16 +41,5 @@ img:not(.icon) {
   right: 5%;
   border: none;
   background: none;
-}
-.carousel_indicators_container {
-  display: table;
-}
-.carousel_indicators {
-  display: table-cell;
-}
-.bullet {
-  color: red;
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
+  cursor: pointer;
 }

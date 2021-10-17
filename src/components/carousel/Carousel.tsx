@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Carousel.css";
+import CarouselIndicators from "./CarouselIndicators";
 
 export type CarouselProps = {
   children: React.ReactNode;
@@ -16,33 +17,39 @@ function Carousel({ children }: CarouselProps) {
   }, [children]);
 
   const next = () => {
-    if (!ref.current) return;
     if (currentIndex >= carouselLeng - 1) {
       setCurrentIndex(0);
     } else {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((index) => index + 1);
+      console.log(currentIndex);
     }
-    ref.current.style.transform = `translateX(-${currentIndex}00%)`;
+    console.log("here", currentIndex);
+    if (ref.current) {
+      ref.current.style.transform = `translateX(-${currentIndex}00%)`;
+      ref.current.style.transition = "all 0.5s ease-in-out";
+    }
   };
 
   const prev = () => {
-    if (!ref.current) return;
     if (currentIndex === 0) {
       setCurrentIndex(carouselLeng - 1);
     } else {
       setCurrentIndex(currentIndex - 1);
     }
-    ref.current.style.transform = `translateX(-${currentIndex}00%)`;
+    if (ref.current) {
+      ref.current.style.transform = `translateX(-${currentIndex}00%)`;
+      ref.current.style.transition = "all 0.5s ease-in-out";
+    }
   };
 
   return (
-    <>
-      <section className="carousel_wrapper">
-        <div className="carousel_container" ref={ref}>
+    <main className="container">
+      <section className="carousel">
+        <article className="carousel_content" ref={ref}>
           {React.Children.map(children, (child) => (
-            <div className="carousel_item">{child}</div>
+            <div className="carousel_content_item">{child}</div>
           ))}
-        </div>
+        </article>
 
         <button className="prev_button" onClick={prev}>
           <img className="icon" src="icons/arrow_back.png" alt="arrow" />
@@ -50,16 +57,12 @@ function Carousel({ children }: CarouselProps) {
         <button className="next_button" onClick={next}>
           <img className="icon" src="icons/arrow_forward.png" alt="arrow" />
         </button>
-
-        <div className="carousel_indicators_container">
-          <div className="carousel_indicators">
-            {React.Children.map(children, () => (
-              <span className="bullet"></span>
-            ))}
-          </div>
-        </div>
       </section>
-    </>
+      <CarouselIndicators
+        carouselLeng={carouselLeng}
+        currentIndex={currentIndex}
+      />
+    </main>
   );
 }
 
