@@ -2,11 +2,11 @@
 
 ## Setting Props
 
-|  name  |  type   | default | --  |
-| :----: | :-----: | :-----: | :-: |
-|  auto  | boolean |  true   |     |
-| height | number  |   450   |     |
-| speed  | number  |  3000   | ms  |
+|   name   |  type   | default |     |
+| :------: | :-----: | :-----: | :-: |
+|  `auto`  | boolean |  true   |     |
+| `height` | number  |   450   |     |
+| `speed`  | number  |  3000   | ms  |
 
 ## Usage
 
