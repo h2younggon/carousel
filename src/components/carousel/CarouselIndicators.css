@@ -14,6 +14,8 @@
   width: 12px;
   height: 4px;
   background-color: #aaa;
+  border-left: 1px solid #4d4d4d;
+  border-right: 1px solid #4d4d4d;
 }
 
 .active {

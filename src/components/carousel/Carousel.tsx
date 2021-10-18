@@ -7,9 +7,10 @@ export type CarouselProps = {
   auto?: boolean;
   height?: number;
   speed?: number;
+  indicators?: boolean;
 };
 
-function Carousel({ children, auto=true, height=450, speed=3000 }: CarouselProps) {
+function Carousel({ children, auto=true, height=450, speed=3000, indicators=true }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAuto, setIsAuto] = useState(auto);
   const ref = useRef<HTMLDivElement>(null);
@@ -23,6 +24,7 @@ function Carousel({ children, auto=true, height=450, speed=3000 }: CarouselProps
   useEffect(() => {
     let autoPlay: any;
     if (isAuto) {
+      if (carouselSize <= 1) return;
       autoPlay = setInterval(() => {
         if (currentIndex >= carouselSize - 1) {
           setCurrentIndex(0);
@@ -36,7 +38,7 @@ function Carousel({ children, auto=true, height=450, speed=3000 }: CarouselProps
 
   // animation
   const animation = useCallback(() => {
-    if (ref.current) {
+    if (ref.current) { 
       ref.current.style.transform = `translate3d(-${currentIndex}00%, 0, 0)`;
       ref.current.style.transition = `transform ${speed}ms ease`;
     }
@@ -67,7 +69,7 @@ function Carousel({ children, auto=true, height=450, speed=3000 }: CarouselProps
     <main className="container">
       <section className="carousel" style={getHeight}>
         <article className="carousel_content" ref={ref} onMouseEnter={() => setIsAuto(false)} onMouseLeave={() => setIsAuto(true)}>
-          {React.Children.count(children) > 0 && React.Children.map(children, (child) => {
+          {children && React.Children.map(children, (child) => {
             return <div className="carousel_content_item">{child}</div>
           })}
         </article>
@@ -79,10 +81,14 @@ function Carousel({ children, auto=true, height=450, speed=3000 }: CarouselProps
           <img className="icon" src="icons/arrow_forward.png" alt="arrow" />
         </button>
       </section>
-      <CarouselIndicators
-        carouselSize={carouselSize}
-        currentIndex={currentIndex}
-      />
+      {
+        indicators && (
+          <CarouselIndicators
+            carouselSize={carouselSize}
+            currentIndex={currentIndex}
+          />
+        )
+      }
     </main>
   );
 }
