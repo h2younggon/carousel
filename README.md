@@ -2,25 +2,13 @@
 
 ## Setting Props
 
-### auto
+|  name  |  type   | default | --  |
+| :----: | :-----: | :-----: | :-: |
+|  auto  | boolean |  true   |     |
+| height | number  |   450   |     |
+| speed  | number  |  3000   | ms  |
 
-#### type: boolean
-
-#### default: true
-
-### height
-
-#### type: number
-
-#### default 400
-
-### speed
-
-#### type: number
-
-#### default: 3000ms
-
-## Example
+## Usage
 
 ```js
 import Carousel from "Carousel";
